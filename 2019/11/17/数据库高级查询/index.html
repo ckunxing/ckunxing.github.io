@@ -22,7 +22,7 @@
     <meta name="description" content>
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>C语言结构体 · ckk&#39;s blog</title>
+    <title>数据库高级查询 · ckk&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -217,7 +217,7 @@
                 <a href="/" >ckk&#39;s blog.</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">C语言结构体</a>
+                <a href="#" class="post-name">数据库高级查询</a>
             </div>
     </div>
     
@@ -247,7 +247,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            C语言结构体
+            数据库高级查询
             <!-- 404 -->
             
         </h1>
@@ -266,7 +266,7 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">2.2k</span>Reading time: <span class="post-count reading-time">10 min</span></span>
+                        <span>Word count: <span class="post-count word-count">3.1k</span>Reading time: <span class="post-count reading-time">14 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
@@ -395,274 +395,65 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <p>struct结构体数据类型前言我们知道，在C语言中有一些基本的数据类型，如  char int float long double string(c99)等等数据类型，他们可以表示一些事物的基本属性，但是当我们想表达一个事物的全部或部分属性时，这时候再用单一的基本数据类型明显就无法满足需求了，这时候C提供了一种自定义数据类型，他可以封装多个基本数据类型，这种数据类型叫结构体，英文名称struct,可以使用struct关键词声明结构体结构体的声明结构体的声明语法如下<br>struct [structure tag] /<em>结构体的标签</em>/{</p>
-<p>   member definition; /<em>零个或多个成员变量的定义</em>/<br>   member definition;<br>   …<br>   member definition;<br>} [one or more structure variables];  /<em>一个或多个结构体变量的定义</em>/结构体标签(structure tag)是可选的，但是推荐还是写上，这样使得代码更加规范清晰，成员变量的定义一般为基本数据类型，如 int age; char name[10]等，成员变量之间使用;隔开,最后一个成员变量后面的;可选, 如下面定义一个图书信息的结构体变量struct Books {<br>   char  title[50];<br>   char  author[50];<br>   char  subject[100];<br>   int   book_id;<br>} book;如下所示struct Books {<br>   char  title[50];<br>   char  author[50];<br>   char  subject[100];<br>   int   book_id<br>} book;我省略了最后一个成员变量后面的分号;代码可以正常运行，但是当我使用gcc编译的时候,出现了下面信息gcc struct.c</p>
-<pre><code> output
-``` shell
-struct.c:8:1: warning: no semicolon at end of struct or union
- } book;
- ^这是警告提示,提示我们需要在struct和union数据类型定义的后面加上分号;,这样的好处就是当我们需要再添加一个成员变量的时候，只需写上该成员变量的定义,而无需先敲;，我太机智了，手动滑稽...没有成员变量的结构体我们也可以定义一个空的结构体，有时候我们需要某一个结构体数据类型，但是暂时又不知道如何填充里面的成员变量，我们可以有如下定义struct Books {
-  //TODO
-} book;访问结构体成员定义完结构体积后接下来就是去访问它并给他赋值，为了访问一个结构体成员变量，我们可以使用成员操作符(.) 成员访问运算符被编码为结构变量名称和我们希望访问的结构成员之间的句点(.)如下所示的完整代码struct.c#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
+        <p>上机实验2-数据库的多表的高级查询操作<br>1、将XKGL数据库还原。<br>2、在XKGL数据库中，完成以下多表连接查询的操作。<br>（1）查询计算机系学生的修课情况，要求列出学生的名字、所修课的课程号和成绩。<br>select Sname , Sdept , Grade , SC.Cno from Student , SC , Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno and Sdept = ‘计算机系’;</p>
+<p>（2）查询“信息管理系”修了“计算机文化学” 的学生姓名和成绩。<br>select Sname , Grade , Sdept , Cname from Student , SC , Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno and Sdept = ‘信息管理系’ and Cname = ‘计算机文化学’ ;</p>
+<p>（3）查询所有选修了Java课程的学生情况，列出学生姓名和所在系。<br>select Sname , Sdept , Cname from Student , SC , Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno and Cname = ‘Java’;</p>
+<p>（4）统计每个系的学生的考试平均成绩。<br>select Sname , Sdept , avg(Grade) as ‘平均成绩’ from Student , SC where Student.Sno = SC.Sno group by Sname , Sdept</p>
+<p>（5）统计计算机系学生每门课程的选课人数、平均成绩、最高成绩和最低成绩。<br>select Cno , count(SC.Sno) as ‘选课人数’ , avg(Grade) as ‘平均成绩’ , max(Grade) as ‘最高成绩’ , min(Grade) as ‘最低成绩’ from Student , SC where Sdept = ‘计算机系’ and Student.Sno = SC.Sno Group by Cno ;</p>
+<p>（6）查询与刘晨在同一个系学习的学生的姓名和所在的系。<br>select Sname , Sdept from Student where Sdept in ( select Sdept from Student where Sname = ‘刘晨’) and Sname &lt;&gt; ‘刘晨’;</p>
+<p>（7）查询与“数据结构”在同一个学期开设的课程的课程名和开课学期。<br>select Semester , Cname from Course where Semester in ( select Semester from Course where Cname = ‘数据结构’ ) and Cname &lt;&gt; ‘数据结构’ ;</p>
+<p>（8）查询至少被两个学生选的课程的课程号。<br>select Cno , count(Sno) as ‘选课人数’ from SC group by Cno having count(Sno) &gt; 2 ;</p>
+<p>（9）查询全体学生的选课情况，包括选修了课程的学生和没有选修课程的学生。<br>    select Student.Sname , SC.Cno , Grade from Student left outer join  SC on Student.Sno = SC.Sno</p>
+<p>（10）查询没人选的课程的课程名。<br>select Cno , Cname from Course where Cno not in ( select distinct Cno from SC ) ;</p>
+<p>（11）查询计算机系没有选课的学生，列出学生姓名和性别。<br>select Sname , Ssex from Student where Sno not in ( select distinct Sno from SC ) and Sdept = ‘计算机系’;</p>
+<p>（12）统计计算机系每个学生的选课门数，包括没有选课的学生。<br>select Sname , ( select count(Sno) from SC where Student.Sno = SC.Sno ) as ‘选课门数’ from Student where Sdept = ‘计算机系’ ;</p>
+<p>（13 ）查询信息管理系选课门数少于3门的学生的学号和选课门数，包括没有选课的学生。查询结果按选课门数递增排序。<br>select Student.Sno , count(SC.Sno) as ‘选课门数’ from Student left join SC on Student.Sno = SC.Sno where Sdept = ‘信息管理系’  group by Student.Sno having count(Student.Sno) &lt; 3 order by count(Student.Sno) asc ;</p>
+<p>（14）查询考试成绩最高的三个成绩，列出学号、课程号和成绩。<br>select Sno , Cno , Grade from SC where Grade in ( select top 3 grade from SC ) ;</p>
+<p>(15) 查询Java考试成绩最高的前三名的学生的姓名、所在系和Java考试成绩。<br>select Sname , Sdept , Grade from Student , SC where Student.Sno = SC.Sno and Grade in ( select top 3 Grade from SC where Cno in ( select Cno from Course where Cname = ‘Java’ ) ) ;</p>
+<p>（16）查询选课人数最少的两门课程（不包括没有人选的课程），列出课程号和选课人数。<br>select top 2 Cno , count(*) as ‘选课人数’ from SC group by Cno order by count(Cno) asc ;</p>
+<p>（17）查询计算机系选课门数超过2门的学生中，考试平均成绩最高的前2名（包括并列的情况）学生的学号、选课门数和平均成绩。<br>select top 2 Student.Sno , count(Student.Sno) as ‘选课门数’ , avg(Grade) as ‘平均成绩’ from Student , SC where Student.Sno = SC.Sno and Sdept = ‘计算机系’ group by Student.Sno having count(Student.Sno) &gt; 2 order by avg(Grade) desc ;</p>
+<p>（18）将计算机系的学生信息保存到#ComputerStudent局部临时表中。<br>select * into #ComputerStudent from Student where Sdept = ‘计算机系’ ;<br>select * from #ComputerStudent ;</p>
+<p>（19）将选了Java课程的学生的学号及成绩存入永久表Java_Grade中。<br>select Sno ,Grade into Java_Grade from SC join Course on Course.Cno = SC.Cno where Cname = ‘Java’ ;<br>select * from Java_Grade ;</p>
+<p>（20）    统计每个学期开设的课程总门数，将结果保存到永久表Cno_Count表中<br>select Course.Semester , count(Course.Cno) as ‘总门数’ into Cno_Count from Course group by Semester ;<br>select * from Cno_Count ;</p>
+<p>（21）    利用例20题生成的新表，查询第2学期开设的课程名、学分和课程总门数。<br>select Cname , Credit , count(Course.Cno) as ‘总门数’ from Course , Cno_Count where Course.Semester = 2 and Course.Semester = Cno_Count.Semester group by Cname , Credit ;</p>
+<p>3、在XKGL数据库中，完成以下多表的高级查询操作。<br>（1）查询选了Java课程的学生的学号、姓名、所在系和成绩，并对所在系进行如下处理：“计算机系”：显示“CS”；“信息管理系”：显示“IM”；“通信工程系”：显示“COM”。<br>select Student.Sno , Sname , case Sdept<br>when ‘计算机系’ then ‘CS’<br>when ‘信息管理系’ then ‘IM’<br>when ‘通信工程系’ then ‘COM’<br>end as ‘所在系’ ,<br>Grade from Student left join SC on Student.Sno = SC.Sno<br>left join Course on SC.Cno = Course.Cno where Course.Cname = ‘Java’ ;</p>
+<p>（2）查询“C001”课程的考试情况，列出学号和成绩，对成绩进行如下处理：如果成绩大于等于90，则在查询结果中显示“优”；如果成绩在80到89分之间，则在查询结果中显示“良”；如果成绩在70到79分之间，则在查询结果中显示“中”；如果成绩在60到69分之间，则在查询结果中显示“及格”；如果成绩小于60分，则在查询结果中显示“不及格”。<br>select Sno , Case<br>when Grade &gt;= 90 then ‘优’<br>when Grade &gt;= 80 and Grade &lt;= 89 then ‘良’<br>when Grade &gt;= 70 and Grade &lt;= 79 then ‘中’<br>when Grade &gt;= 60 and Grade &lt;= 60 then ‘及格’<br>when Grade &lt; 60 then ‘不及格’<br>end as ‘考试情况’ , Grade<br>from SC where Cno = ‘C001’</p>
+<p>（3）统计每个学生的考试平均成绩，列出学号、考试平均成绩和考试情况，其中考试情况的处理为： 如果平均成绩大于等于90，则考试情况为“好”；如果平均成绩在80～89，则考试情况为“比较好”；如果平均成绩在70～79，则考试情况为“一般”；如果平均成绩在60～69，则考试情况为“不太好”；如果平均成绩低于60，则考试情况为“比较差”。<br>select Sno , avg(Grade) as ‘平均成绩’ , case<br>when avg(Grade) &gt;= 90 then ‘好’<br>when avg(Grade) &gt;= 80 and avg(Grade) &lt;= 89 then ‘比较好’<br>when avg(Grade) &gt;= 70 and avg(Grade) &lt;= 79 then ‘一般’<br>when avg(Grade) &gt;= 60 and avg(Grade) &lt;= 69 then ‘不太好’<br>when avg(Grade) &lt; 60 then ‘不太好’<br>end as ‘考试情况’<br>from Sc group by sno ;</p>
+<p>（4）统计计算机系每个学生的选课门数，包括没有选课的学生。列出学号、选课门数和选课情况，其中对选课情况的处理为：如果选课门数超过4，则选课情况为“多”；如果选课门数在2~4，则选课情况为“一般”；如果选课门数少于2，则选课情况为“少”；如果学生没有选课，则选课情况为“未选”。并将查询结果按选课门数降序排序。<br>select Student.Sno , Count(Cno) as ‘选课门数’ , case<br>when count(Cno) &gt; 4 then ‘多’<br>when count(Cno) &gt;= 2 and count(Cno) &lt;= 4 then ‘一般’<br>when count(Cno) &lt; 2 and count(Cno) &gt; 0 then ‘少’<br>when count(Cno) = 0 then ‘未选’<br>end as ‘选课情况’<br>from Student left join SC on Student.Sno = SC.Sno<br>where Student.Sdept = ‘计算机系’ group by Student.Sno<br>order by count(Cno) desc ;</p>
+<p>（5）查询与“刘晨”在同一个系学习的学生。<br>select * from Student where Sdept in ( select Sdept from Student where Sname = ‘刘晨’ ) and Sname &lt;&gt; ‘刘晨’ ;</p>
+<p>（6）查询考试成绩大于90分的学生的学号和姓名。<br>select Sno , Sname from Student where Sno in ( select Sno from SC where Grade &gt; 90 ) ;</p>
+<p>（7）查询计算机系选了“C002”课程的学生，列出姓名和性别。<br>select Sname , Ssex from Student left join SC on Student.Sno = SC.Sno where Cno = ‘C002’ and Sdept = ‘计算机系’ ;</p>
+<p>（8）查询选修了“Java”课程的学生的学号和姓名。<br>select Sno , Sname from Student where Sno in ( select Sno from SC where Cno in ( select Cno from Course where Cname = ‘Java’ ) ) ;</p>
+<p>（9）统计选了Java课程的这些学生的选课门数和平均成绩。<br>select Sno , count(Cno) as ‘选课门数’ , avg(Grade) as ‘平均成绩’ from SC where Sno in ( select Sno from SC where Cno in ( select Cno from Course where Cname = ‘Java’ ) ) group by Sno ;</p>
+<p>（10）查询选了“JAVA”课程的学生学号、姓名和JAVA成绩。<br>select Student.Sno , Sname , Grade from Student , SC , Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno and Cname = ‘Java’ ;</p>
+<p>（11）查询选了“C004”号课程且成绩高于此课程的平均成绩的学生的学号和成绩。<br>select Sno , Grade from SC where Grade &gt; ( select avg(Grade) from SC where Cno = ‘C004’ ) and Cno = ‘C004’ ;</p>
+<p>（12）查询考试平均成绩高于全体学生的总平均成绩的学生的学号和平均成绩。<br>select Sno , avg(Grade) as ‘平均成绩’ from SC group by Sno having avg(Grade) &gt; ( select avg(Grade) from SC ) ;</p>
+<p>（13）查询没选“C001”号课程的学生姓名和所在系。<br>select Sname , Sdept from Student where Sno not in ( select Sno from SC where Cno = ‘C001’ ) ;</p>
+<p>（14）查询计算机系没选JAVA课程的学生姓名和性别。<br>select Sname , Ssex from Student where Sno not in ( select SC.Sno from SC , Course where SC.Cno = Course.Cno and Cname = ‘Java’ ) and Sdept = ‘计算机系’ ;</p>
+<p>(15) 查询其他学期开设的课程中比第1学期开设课程的学分少的课程名、开课学期和学分。<br>select Cname , Semester , Credit from Course where Credit &lt; some ( select credit from Course where Semester = 1 ) and Semester &lt;&gt; 1 ;</p>
+<p>（16）查询至少有一次成绩大于等于90的学生的姓名，所修的课程号和成绩。<br>select Sname , Cno , Grade from Student , SC  where Student.Sno = SC.Sno and SC.Sno in ( select Sno from SC where Grade &gt;= 90 ) ;</p>
+<p>（17）查询比第1学期开设的所有课程的学分都小的其他学期开设的课程名、开课学期和学分。<br>select Cname , Semester , Credit from Course where Credit &lt; all ( select Credit from Course where Semester = 1 ) and Semester &lt;&gt; 1 ;</p>
+<p>（18）查询每个学期学分最低的课程的课程名、开课学期和学分。<br>select Cname , Semester , Credit from Course first where Credit in ( select min(Credit) from Course second where first.Semester = second.Semester ) ;</p>
+<p>（19）查询每门课程考试成绩最高的两个学生的学号以及相应的课程号和成绩。不包括没考试的课程。<br>select Sno , Cno ,Grade from ( select row_number() over ( partition by Cno order by Grade desc ) paiming , * from SC ) t where paiming &lt;= 2 order by Cno asc ,Grade desc</p>
+<p>（20）查询每门课程中，考试成绩低于该门课程的平均成绩的学生的学号和成绩。<br>select Sno , Grade from SC first where Grade &lt; ( select avg(Grade) from SC second where first.Cno = second.Cno );</p>
+<p>（21）查询有最高学分超过本学期平均学分1.5倍的学期。<br>select Semester from Course first group by Semester having max(Credit) &gt;= all ( select 1.5 * avg(Credit) from Course second where first.Semester = second.Semester ) ;</p>
+<p>（22）查询学生姓名、所在系和该学生选的课程门数。<br>select Sname , Sdept , ( select count(Cno) from SC where SC.Sno = Student.Sno ) as ‘选课门数’ from Student ;</p>
+<p>（23）查询课程名、开课学期及选该门课的学生人数、平均成绩。不包括没人选的课程。<br>select Cname , Semester , count(SC.Sno) as ‘选课人数’ , avg(Grade) as ‘平均成绩’ from Course ,SC where SC.Cno = Course.Cno group by Cname , Semester ;</p>
+<p>(24) 使用exists查询选了“C002”课程的学生姓名。<br>select Sname from Student where exists ( select * from SC where Student.Sno = SC.Sno and Cno = ‘C002’ ) ;</p>
+<p>（25）使用exists查询选了JAVA课程的学生姓名和所在系。<br>select Sname , Sdept from Student where exists ( select * from SC where exists ( select * from Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno and Cname = ‘Java’ ) ) ;</p>
+<p>（26）使用exists查询没有选修“C001”课程的学生姓名和所在系。<br>select  Sname , Sdept from Student where not exists ( select * from SC where Student.Sno = SC.Sno and Cno = ‘C001’ ) ;</p>
+<p>(27) 使用exists查询计算机系没选JAVA的学生姓名和性别。<br>select Sname , Ssex from Student where not exists ( select * from SC where exists ( select * from Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno ) )and Sdept = ‘计算机系’ ;</p>
+<p> (28) 使用exists查询至少选了全部课程的学生的学号、姓名和所在系。<br>select Student.Sno , Sname , Sdept from Student where not exists ( select * from Course where not exists ( select * from SC where Student.Sno = SC.Sno and SC.Cno = Course.Cno ) ) ;</p>
+<p>(29) 使用exists查询至少选了“0811102”学生所选的全部课程的学生的学号和所选的课程号。<br>select distinct Sno from SC first where not exists ( select * from SC second where second.Sno = ‘0811102’ and not exists ( select * from SC third where first.Sno = third.Sno and third.Cno = second.Cno ) ) ;</p>
 
-struct Books {
-   char  title[50];
-   char  author[50];
-   char  subject[100];
-   int   book_id;
-};
-
-int main( ) {
-
-   struct Books Book1;        /* Declare Book1 of type Book */
-   struct Books Book2;        /* Declare Book2 of type Book */
-
-   /* book 1 specification */
-   strcpy( Book1.title, &quot;C Programming&quot;);
-   strcpy( Book1.author, &quot;Nuha Ali&quot;);
-   strcpy( Book1.subject, &quot;C Programming Tutorial&quot;);
-   Book1.book_id = 6495407;
-
-   /* book 2 specification */
-   strcpy( Book2.title, &quot;Telecom Billing&quot;);
-   strcpy( Book2.author, &quot;Zara Ali&quot;);
-   strcpy( Book2.subject, &quot;Telecom Billing Tutorial&quot;);
-   Book2.book_id = 6495700;
-
-   /* print Book1 info */
-   printf( &quot;Book 1 title : %s\n&quot;, Book1.title);
-   printf( &quot;Book 1 author : %s\n&quot;, Book1.author);
-   printf( &quot;Book 1 subject : %s\n&quot;, Book1.subject);
-   printf( &quot;Book 1 book_id : %d\n&quot;, Book1.book_id);
-
-   /* print Book2 info */
-   printf( &quot;Book 2 title : %s\n&quot;, Book2.title);
-   printf( &quot;Book 2 author : %s\n&quot;, Book2.author);
-   printf( &quot;Book 2 subject : %s\n&quot;, Book2.subject);
-   printf( &quot;Book 2 book_id : %d\n&quot;, Book2.book_id);
-
-   return 0;
-}编译并执行gcc struct.c &amp;&amp; ./a.out输出Book 1 title : C Programming
-Book 1 author : Nuha Ali
-Book 1 subject : C Programming Tutorial
-Book 1 book_id : 6495407
-Book 2 title : Telecom Billing
-Book 2 author : Zara Ali
-Book 2 subject : Telecom Billing Tutorial
-Book 2 book_id : 6495700结构作为函数参数同样的，我们也可以像基本数据类型一样，把结构体作为函数的参数,如下所示我们定义一个打印结构体的函数#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-struct Books {
-   char  title[50];
-   char  author[50];
-   char  subject[100];
-   int   book_id;
-};
-
-/* function declaration */
-void printBook( struct Books book );
-
-int main( ) {
-
-   struct Books Book1;        /* Declare Book1 of type Book */
-   struct Books Book2;        /* Declare Book2 of type Book */
-
-   /* book 1 specification */
-   strcpy( Book1.title, &quot;C Programming&quot;);
-   strcpy( Book1.author, &quot;Nuha Ali&quot;);
-   strcpy( Book1.subject, &quot;C Programming Tutorial&quot;);
-   Book1.book_id = 6495407;
-
-   /* book 2 specification */
-   strcpy( Book2.title, &quot;Telecom Billing&quot;);
-   strcpy( Book2.author, &quot;Zara Ali&quot;);
-   strcpy( Book2.subject, &quot;Telecom Billing Tutorial&quot;);
-   Book2.book_id = 6495700;
-
-   /* print Book1 info */
-   printBook( Book1 );
-
-   /* Print Book2 info */
-   printBook( Book2 );
-
-   return 0;
-}
-
-void printBook( struct Books book ) {
-
-   printf( &quot;Book title : %s\n&quot;, book.title);
-   printf( &quot;Book author : %s\n&quot;, book.author);
-   printf( &quot;Book subject : %s\n&quot;, book.subject);
-   printf( &quot;Book book_id : %d\n&quot;, book.book_id);
-}编译运行gcc struct.c &amp;&amp; ./a.out输出Book 1 title : C Programming
-Book 1 author : Nuha Ali
-Book 1 subject : C Programming Tutorial
-Book 1 book_id : 6495407
-Book 2 title : Telecom Billing
-Book 2 author : Zara Ali
-Book 2 subject : Telecom Billing Tutorial
-Book 2 book_id : 6495700结构体的指针我们也可以定义结构体指针,像这样struct Books *struct_pointer;现在你可以存放结构体变量的地址在结构体变量指针中.和基本数据类型的变量一样，我们使用&amp;操作符取一个变量的地址struct_pointer = &amp;Book1;接下来就是使用结构体指针去访问成员变量了，访问的操作符我们由原来的.变为-&gt;,没错，这个是不是很形象呢？完整代码如下#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-struct Books {
-   char  title[50];
-   char  author[50];
-   char  subject[100];
-   int   book_id;
-};
-
-/* function declaration */
-void printBook( struct Books *book );
-int main( ) {
-
-   struct Books Book1;        /* Declare Book1 of type Book */
-   struct Books Book2;        /* Declare Book2 of type Book */
-
-   /* book 1 specification */
-   strcpy( Book1.title, &quot;C Programming&quot;);
-   strcpy( Book1.author, &quot;Nuha Ali&quot;);
-   strcpy( Book1.subject, &quot;C Programming Tutorial&quot;);
-   Book1.book_id = 6495407;
-
-   /* book 2 specification */
-   strcpy( Book2.title, &quot;Telecom Billing&quot;);
-   strcpy( Book2.author, &quot;Zara Ali&quot;);
-   strcpy( Book2.subject, &quot;Telecom Billing Tutorial&quot;);
-   Book2.book_id = 6495700;
-
-   /* print Book1 info by passing address of Book1 */
-   printBook( &amp;Book1 );
-
-   /* print Book2 info by passing address of Book2 */
-   printBook( &amp;Book2 );
-
-   return 0;
-}
-
-void printBook( struct Books *book ) {
-
-   printf( &quot;Book title : %s\n&quot;, book-&gt;title);
-   printf( &quot;Book author : %s\n&quot;, book-&gt;author);
-   printf( &quot;Book subject : %s\n&quot;, book-&gt;subject);
-   printf( &quot;Book book_id : %d\n&quot;, book-&gt;book_id);
-}编译运行gcc struct.c &amp;&amp; ./a.out输出Book 1 title : C Programming
-Book 1 author : Nuha Ali
-Book 1 subject : C Programming Tutorial
-Book 1 book_id : 6495407
-Book 2 title : Telecom Billing
-Book 2 author : Zara Ali
-Book 2 subject : Telecom Billing Tutorial
-Book 2 book_id : 6495700结构体数组#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-struct Books {
-    char  title[50];
-    char  author[50];
-    char  subject[100];
-    int   book_id;
-};
-
-/* function declaration */
-void printBook( struct Books *book );
-int main( ) {
-
-    struct Books books[2];
-
-    /* book 1 specification */
-    strcpy( books[0].title, &quot;C Programming&quot;);
-    strcpy( books[0].author, &quot;Nuha Ali&quot;);
-    strcpy( books[0].subject, &quot;C Programming Tutorial&quot;);
-    books[0].book_id = 6495407;
-
-    /* book 2 specification */
-    strcpy( books[1].title, &quot;Telecom Billing&quot;);
-    strcpy( books[1].author, &quot;Zara Ali&quot;);
-    strcpy( books[1].subject, &quot;Telecom Billing Tutorial&quot;);
-    books[1].book_id = 6495700;
-
-    /* print Book1 info by passing address of Book1 */
-    printBook( &amp;books[0] );
-
-    /* print Book2 info by passing address of Book2 */
-    printBook( &amp;books[1] );
-
-    return 0;
-}
-
-void printBook( struct Books *book ) {
-
-    printf( &quot;Book title : %s\n&quot;, book-&gt;title);
-    printf( &quot;Book author : %s\n&quot;, book-&gt;author);
-    printf( &quot;Book subject : %s\n&quot;, book-&gt;subject);
-    printf( &quot;Book book_id : %d\n&quot;, book-&gt;book_id);
-}编译运行gcc struct.c &amp;&amp; ./a.out输出Book 1 title : C Programming
-Book 1 author : Nuha Ali
-Book 1 subject : C Programming Tutorial
-Book 1 book_id : 6495407
-Book 2 title : Telecom Billing
-Book 2 author : Zara Ali
-Book 2 subject : Telecom Billing Tutorial
-Book 2 book_id : 6495700结构体的内存计算没错，估计你已经知道了，结构体变量的所占用内存空间的大小为各成员变量所占空间之和,如下所示的结构体占用内存大小在注释里面#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-struct Books {
-};
-
-int main( ) {
-    printf(&quot;%d\n&quot;, (int) sizeof(struct Books)); /*0*/
-    return 0;
-}
-#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-struct Books {
-    char title[50];
-    char author[50];
-    char subject[100];
-    int book_id;
-};
-
-int main() {
-    printf(&quot;%d\n&quot;, (int) sizeof(struct Books)); /*204*/
-    return 0;
-}位域有时候我们内存紧张的时候，我们可以使用位域定义结构体成员变量，比如当我们需要定义一个表示true或false的时候，如果想这样定义int isOpen;明显很浪费空间，因为一个真假值只需要一个字位表示，所以我们可以这样定义unsigned int isOpen:1;但是如果你直接写在函数中是会报错的，我们应该写在结构体中int main() {
-    unsigned int isOpen:1; /*编译无法通过*/
-    return 0;
-}正确姿势struct packed_struct {
-   unsigned int f1:1;
-   unsigned int f2:1;
-   unsigned int f3:1;
-   unsigned int f4:1;
-   unsigned int type:4;
-   unsigned int my_int:9;
-} pack;C尽可能紧凑地自动打包上述位字段，前提是字段的最大长度小于或等于计算机的整数字长。如果不是这种情况，那么一些编译器可能允许字段存储器重叠，而其他编译器会将下一个字段存储在下一个字中。#include &lt;stdio.h&gt;
-#include &lt;string.h&gt;
-
-struct packed_struct {
-    unsigned int f1:1;
-    unsigned int f2:1;
-    unsigned int f3:1;
-    unsigned int f4:1;
-    unsigned int type:4;
-    unsigned int my_int:9;
-} pack;
-int main() {
-    printf(&quot;%d\n&quot;, (int) sizeof(struct packed_struct));
-    return 0;
-}输出结果  8
-
-作者：shellhub
-链接：https://zhuanlan.zhihu.com/p/52652176
-来源：知乎</code></pre>
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="https://iamckx.com">Chenkunkun</a>
-            <p>原文链接：<a href="https://iamckx.com/2019/11/17/c语言结构体/">https://iamckx.com/2019/11/17/c语言结构体/</a>
-            <p>发表日期：<a href="https://iamckx.com/2019/11/17/c语言结构体/">November 17th 2019, 9:43:38 am</a>
-            <p>更新日期：<a href="https://iamckx.com/2019/11/17/c语言结构体/">November 17th 2019, 9:47:49 am</a>
+            <p>原文链接：<a href="https://iamckx.com/2019/11/17/数据库高级查询/">https://iamckx.com/2019/11/17/数据库高级查询/</a>
+            <p>发表日期：<a href="https://iamckx.com/2019/11/17/数据库高级查询/">November 17th 2019, 10:21:12 am</a>
+            <p>更新日期：<a href="https://iamckx.com/2019/11/17/数据库高级查询/">November 17th 2019, 10:21:50 am</a>
             <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -670,17 +461,12 @@ int main() {
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2019/11/17/数据库高级查询/" title= "数据库高级查询">
-                    <div class="nextTitle">数据库高级查询</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2019/09/06/hello-world/" title= "Hello World">
-                    <div class="prevTitle">Hello World</div>
+                <a href= "/2019/11/17/c语言结构体/" title= "C语言结构体">
+                    <div class="prevTitle">C语言结构体</div>
                 </a>
             
         </li>
