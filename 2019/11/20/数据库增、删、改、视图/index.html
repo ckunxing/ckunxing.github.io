@@ -22,7 +22,7 @@
     <meta name="description" content>
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>ckk&#39;s blog</title>
+    <title>数据库的增、删、改、视图 · ckk&#39;s blog</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -77,6 +77,8 @@
 
     <link rel="preload" href="/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="stylesheet" href="/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     
     <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 /* This file is meant as a standalone workflow for
@@ -201,14 +203,23 @@
 </head>
 
     
-        <body class="home-body">
+        <body class="post-body">
     
     
-<header class="header index-header">
+<header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >ckk&#39;s blog.</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">数据库的增、删、改、视图</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>ckk's blog.</a>
 </header>
@@ -227,17 +238,17 @@ height:50vh;
     <!-- 主页  -->
     
     
-    <!-- 文章页  -->
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/intro/mme-bg.jpg)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            ckk's blog.
-            <!-- 文章页  -->
+            数据库的增、删、改、视图
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
@@ -245,10 +256,43 @@ height:50vh;
             <!-- 主页副标题  -->
             
             
-            <!-- 文章页  -->
+            <!-- 404 -->
             
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1.2k</span>Reading time: <span class="post-count reading-time">5 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/11/20</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -349,210 +393,73 @@ height:50vh;
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/11/20/数据库增、删、改、视图/" >
-            
-                <span>数据库的增、删、改、视图</span>
-        </a>
-        <div class="abstract-content">
-            1、    将XKGL数据库还原。2、在XKGL数据库中，完成以下数据库的更新操作。（1）将一个新生插入到Student表中，其学号为：0821105，姓名为：陈冬，性别为：男，年龄18岁，信息管理系学生。insert into Student ( Sno , Sname , Ssex , Sage , Sdept ) values ( ‘0821105’ , ‘陈东’ , ‘男’ , ‘18’ , ‘信息管理系’ ) ;select * from Student where Sname = ‘陈东’ ;
-（2）在SC表中插入3条新记录，学号均为“0821105”，选修的课程号分别为“C...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/20</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/11/17/数据库高级查询/" >
-            
-                <span>数据库高级查询</span>
-        </a>
-        <div class="abstract-content">
-            上机实验2-数据库的多表的高级查询操作1、将XKGL数据库还原。2、在XKGL数据库中，完成以下多表连接查询的操作。（1）查询计算机系学生的修课情况，要求列出学生的名字、所修课的课程号和成绩。select Sname , Sdept , Grade , SC.Cno from Student , SC , Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno and Sdept = ‘计算机系’;
-（2）查询“信息管理系”修了“计算机文化学” 的学生姓名和成绩。select Sname , Grade , Sdept , Cn...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/17</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/11/17/c语言结构体/" >
-            
-                <span>C语言结构体</span>
-        </a>
-        <div class="abstract-content">
-            struct结构体数据类型前言我们知道，在C语言中有一些基本的数据类型，如  char int float long double string(c99)等等数据类型，他们可以表示一些事物的基本属性，但是当我们想表达一个事物的全部或部分属性时，这时候再用单一的基本数据类型明显就无法满足需求了，这时候C提供了一种自定义数据类型，他可以封装多个基本数据类型，这种数据类型叫结构体，英文名称struct,可以使用struct关键词声明结构体结构体的声明结构体的声明语法如下struct [structure tag] /结构体的标签/{
-   member definition; /零个或多个成员...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/11/17</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/09/06/hello-world/" >
-            
-                <span>Hello World</span>
-        </a>
-        <div class="abstract-content">
-            Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
-Quick StartCreate a new post1$ hexo new "My New Post"
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>1、    将XKGL数据库还原。<br>2、在XKGL数据库中，完成以下数据库的更新操作。<br>（1）将一个新生插入到Student表中，其学号为：0821105，姓名为：陈冬，性别为：男，年龄18岁，信息管理系学生。<br>insert into Student ( Sno , Sname , Ssex , Sage , Sdept ) values ( ‘0821105’ , ‘陈东’ , ‘男’ , ‘18’ , ‘信息管理系’ ) ;<br>select * from Student where Sname = ‘陈东’ ;</p>
+<p>（2）在SC表中插入3条新记录，学号均为“0821105”，选修的课程号分别为“C001”、“C002”和“C004”，成绩分别为：90、88和NULL。<br>insert into SC ( Sno , Cno , Grade ) values ( ‘0821105’ , ‘C001’ , 90 ) , ( ‘0821105’ , ‘C002’ , 88 ) , ( ‘0821105’ , ‘C004’ , NULL ) ;<br>select * from SC where Sno = ‘0821105’ ;</p>
+<p>（3）将一新学生插入到Student表中，其学号为：0811105，姓名为：李丽，性别为：女，出生日期暂缺，计算机系学生。<br>insert into Student ( Sno , Sname , Ssex , Sdept ) values ( ‘0811105’ , ‘李丽’ , ‘女’ , ‘计算机系’ ) ;<br>select * from Student where  Sname = ‘李丽’ ;</p>
+<p>（4）统计每门课程的平均成绩，并把统计结果保存到一个新表C_Grade中。<br>select Cname , avg(Grade) as ‘平均成绩’ into C_Grade from SC join Course on Course.Cno = SC.Cno group by Cname ;<br>select * from C_Grade ;</p>
+<p>（5）建立一个新表Top_Grade，结构包括学生姓名、所在系、选的课程名和考试成绩。通过使用TOP子句，从相关表中查出符合条件的前5条记录插入到该表中。<br>select top 5 Sname , Sdept , Cname , Grade into Top_Grade from Student , SC , Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno ;<br>select * from Top_Grade ;</p>
+<p>（6）将所有学生的年龄加1。<br>update Student set Sage = Sage + 1 ;<br>select Sage from Student ;</p>
+<p>（7）将“C001”号课程的学分改为5。<br>update Course set Credit = 5 where Cno = ‘C001’ ;</p>
+<p>（8）将计算机系全体学生的成绩加5分。<br>update SC set Grade = Grade + 5 where Sno in ( select Sno from Student where Sdept = ‘计算机系’ ) ;<br>select Sdept , Grade from Student , SC where Student.Sno = SC.Sno ;<br>加不上去，因为学号为’0811101’的同学原始成绩大于95，加5分后超100，与Grade列的CHECK约束冲突。<br>（9）将Java课程改为第2学期开设，3个学分。<br>update Course set Semester = 2 , Credit = 3 where Cname = ‘Java’ ;</p>
+<p>（10）将学分最低的课程的学分加2分。<br>update Course set Credit = Credit where Credit = ( select min(Credit) from Course ) ;</p>
+<p>（11）将SC表复制成为SCnew，在SCnew中删除所有学生的选课记录。<br>select * into SCnew from SC ;<br>delete from SCnew ;</p>
+<p>（12）在SCnew中删除所有不及格学生的选课记录。<br>delete from SCnew where Grade &lt; 60 ;</p>
+<p>（13）在SCnew中删除计算机系不及格学生的选课记录。<br>delete from SC from Student join SC on Student.Sno = SC.Sno where Sdept = ‘计算机系’ and Grade &lt; 60 ;</p>
+<p>*(14) 删除JAVA考试成绩最低的学生的JAVA修课记录。<br>delete from SC from Course join SC on SC.Cno = Course.Cno where Sno = ( select min(Grade) from SC where Cname = ‘Java’ ) and Cname = ‘Java’ ;<br>后面还要用SC表，所以没有执行。<br>3、在XKGL数据库中，完成以下数据库的视图操作。<br>（1）建立查询信息管理系学生的学号、姓名、性别和出生年份的视图。<br>create view IS_Student ( Sno , Sname , Ssex , Sbirth ) as select Sno , Sname , Ssex , 2019-Sage from Student where Sdept = ‘信息管理系’ ;</p>
+<p>（2）建立查询信息管理系选了C001课程的学生学号、姓名和成绩的视图。<br>create view IS_C001 ( Sno ,Sname ,Grade ) as select Student.Sno , Sname , Grade from Student , SC where Sdept = ‘信息管理系’ and Cno = ‘C001’ and Student.Sno = SC.Sno ;</p>
+<p>（3）利用第1题建立的视图，建立查询信息管理系1991年之后出生的学生学号、姓名和出生年份的视图。<br>create view New_IS_Student ( Sno , Sname , Sbirth ) as select Sno , Sname , Sbirth from IS_Student where Sbirth &gt; 1991 ;</p>
+<p>（4）定义一个查询学生出生年份的视图，内容包括学号，姓名和出生年份。<br>create view Sbirth_Student ( Sno ,Sname , Sbirth ) as select Sno ,Sname , 2019-Sage from Student ;</p>
+<p>（5）定义一个查询每个学生的学号及平均成绩的视图V_S_G。<br>create view V_S_G ( Sno , avgGrade ) as select Sno , avg(Grade) from SC group by Sno ;</p>
+<p>（6）利用第1题建立的视图，查询信息管理系男生的信息。<br>select * from IS_Student where Ssex = ‘男’ ;</p>
+<p>（7）利用第2题建立的视图，查询信息管理系选修了“C001”号课程且成绩大于等于60的学生的学号、姓名和成绩。<br>select Sno , Sname , Grade from IS_C001 where Grade &gt;= 60 ;</p>
+<p>（8）查询信息管理系学生的学号、姓名、所选课程名<br>select Student.Sno , Sname , Cname from Student , SC , Course where Student.Sno = SC.Sno and SC.Cno = Course.Cno and Sdept = ‘信息管理系’ ;</p>
+<p>（9）利用第5题建立的视图，查询平均成绩大于等于80的学生的学号和平均成绩。<br>select Sno , avgGrade from V_S_G where avgGrade &gt;= 80 ;</p>
+<p>*（10）修改V_S_G视图，使其统计每个学生的考试平均成绩和修课总门数。<br>drop view V_S_G ;<br>create view V_S_G ( Sno , avgGrade , countCno ) as select Sno , avg(Grade) , count(Cno) from SC group by Sno ;<br>select * from V_S_G ;</p>
+<p>随便写的，谨慎参考。</p>
 
-More info: Writing
-Run server1$ hexo server
-
-Mo...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/09/06</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
     </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://iamckx.com">Chenkunkun</a>
+            <p>原文链接：<a href="https://iamckx.com/2019/11/20/数据库增、删、改、视图/">https://iamckx.com/2019/11/20/数据库增、删、改、视图/</a>
+            <p>发表日期：<a href="https://iamckx.com/2019/11/20/数据库增、删、改、视图/">November 20th 2019, 8:39:53 pm</a>
+            <p>更新日期：<a href="https://iamckx.com/2019/11/20/数据库增、删、改、视图/">November 20th 2019, 8:39:49 pm</a>
+            <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
     
     <!-- paginator  -->
-    
-</main>
-            <!-- profile -->
+    <ul class="post-paginator">
+        <li class="next">
             
-            <div class="profile">
-    <img class="profile-avatar" alt="avatar" src= /avatar/hjkl.jpg >
-    <div class="profile-name">chenkunkun</div>
-    
-    <div class="profile-signature">
-        witness me
-    </div>
-    
-    
-    <div class="profile-social">
-        
-    
-        
+        </li>
+        <li class="previous">
             
-                <a href="mailto:hello@iamckx.com" class="iconfont-archer email" title=email ></a>
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2019/11/17/数据库高级查询/" title= "数据库高级查询">
+                    <div class="prevTitle">数据库高级查询</div>
+                </a>
             
-        
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
-        
     
-        
-            
-                <span class="iconfont-archer wechat" title=wechat>
-                  
-                  <img class="profile-qr" src="/assets/weixin.jpg" />
-                </span>
-            
-        
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
     
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
     
 
-    </div>
-    
-    
-        <div class="friends">
-            <div>FRIENDS</div>
-            
-                
-                    <span>
-                        <a href= //www.baidu.com target="_black">friendA</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href= //www.google.com target="_black">friendB</a>
-                    </span>
-                
-            
-                
-                    <span>
-                        <a href= //www.zhihu.com target="_black">friendC</a>
-                    </span>
-                
-            
-        </div>
-    
-    
-        <div class="about-me">
-            <a href = "/about" >ABOUT ME</a>
-        </div>
-    
-</div>
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
             
         </div>
         <footer class="footer footer-unloaded">
@@ -631,6 +538,24 @@ Mo...
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -795,6 +720,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
